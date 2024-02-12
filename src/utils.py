@@ -29,9 +29,31 @@ def generate_sitemap(app):
             url = url_for(rule.endpoint, **(rule.defaults or {}))
             links.append(url)
 
-    links_html = "".join(["<li><a href='" + y + "'>" + y + "</a></li>" for y in links])
-    return """
-        <div style="text-align: center;">
-        <img src='https://github.com/breatheco-de/exercise-family-static-api/blob/master/rigo-baby.jpeg?raw=true' />
-        <h1>Hello Rigo!!</h1>
-        This is your api home, remember to specify a real endpoint path like: <ul style="text-align: left;">"""+links_html+"</ul></div>"
+    links_html = "".join(["<div class='display-4'><a href='" + y + "'>" + y + "</a></div>" for y in links])
+    return f"""
+        <html>
+        <head>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+            <style>
+                @font-face {{
+                    font-family: 'Roboto';
+                    src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+                    /* Add more src declarations for other Roboto font weights/styles if needed */
+                }}
+                h1, h3 {{
+                    font-family: 'Roboto', sans-serif;
+                }}
+            </style>
+        </head>
+        <body class="bg-dark text-white">
+            <div class="container">
+                <div class="text-center">
+                    <h1 class="display-1">Diego Gómez</h1>
+                    <h3 class="display-4">Family Static API</h3>
+                    <hr/>
+                    <ul class="list-unstyled">{links_html}</ul>
+                </div>
+            </div>
+        </body>
+        </html>
+    """
